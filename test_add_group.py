@@ -6,6 +6,7 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import NoSuchElementException
 
 
+
 def is_alert_present(self):
     try:
         self.wd.switch_to_alert()
