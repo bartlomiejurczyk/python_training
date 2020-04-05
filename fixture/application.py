@@ -1,5 +1,4 @@
 from selenium import webdriver
-__author__ = 'bartek'
 
 
 class Application:

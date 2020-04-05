@@ -1,4 +1,3 @@
-__author__ = 'bartek'
 
 # -*- coding: utf-8 -*-
 from selenium import webdriver

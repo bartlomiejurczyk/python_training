@@ -1,4 +1,3 @@
-__author__ = 'bartek'
 
 
 class Contact:
