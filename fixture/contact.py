@@ -80,6 +80,7 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to.alert.accept()
 
+
     def update_first_contact(self, contact):
         wd = self.app.wd
         wd.find_element_by_xpath("(//img[@alt='Edit'])[6]").click()

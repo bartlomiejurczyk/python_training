@@ -12,5 +12,4 @@ def test_update_contact(app):
                 _bmonth="March",
                 _byear="1989", _aday="21", _amonth="June", _ayear="3030", _secondary_address="EDIT address",
                 _secondary_home="EDIT", _secondary_notes="EDIT notes"))
-
     app.session.logout()

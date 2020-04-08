@@ -3,6 +3,7 @@
 from model.contact import Contact
 
 
+
 def test_add_empty_entry(app):
     app.session.login(username="admin", password="secret")
     app.contact.fill_new_entry(Contact(_first_name="", _middle_name="", _last_name="", _nickname="",

@@ -2,6 +2,7 @@
 from model.group import Group
 
 
+
 def test_add_test_group(app):
     app.session.login(username="admin", password="secret")
     app.group.create(Group(_name="test1", _header="header1", _footer="footer1"))
