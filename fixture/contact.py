@@ -122,6 +122,14 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element_by_link_text("home page").click()
 
+
     def count(self):
         wd = self.app.wd
+        self.open_contact_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+
+    def open_contact_page(self):
+        wd = self.app.wd
+        if not (wd.current_url.endswith("/addressbook/") and len(wd.find_element_by_xpath("(//img[@alt='Edit'])")) > 0):
+            wd.find_element_by_xpath("//img[@alt='Addressbook']").click()
