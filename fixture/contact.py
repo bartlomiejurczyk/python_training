@@ -21,6 +21,7 @@ class ContactHelper:
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to.alert.accept()
+        self.return_to_homepage()
 
 
     def update_first_contact(self, contact):
@@ -120,16 +121,17 @@ class ContactHelper:
 
     def return_to_homepage(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home page").click()
+        if not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name("searchstring")) > 0):
+            wd.find_element_by_link_text("home").click()
 
 
     def count(self):
         wd = self.app.wd
-        self.open_contact_page()
+        # self.open_contact_page()
         return len(wd.find_elements_by_name("selected[]"))
 
 
     def open_contact_page(self):
         wd = self.app.wd
-        if not (wd.current_url.endswith("/addressbook/") and len(wd.find_element_by_xpath("(//img[@alt='Edit'])")) > 0):
-            wd.find_element_by_xpath("//img[@alt='Addressbook']").click()
+        if not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name("searchstring")) > 0):
+            wd.find_element_by_link_text("home").click()
