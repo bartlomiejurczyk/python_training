@@ -15,6 +15,7 @@ class ContactHelper:
         # add new entry (press to submit button)
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         self.return_to_homepage()
+        self.contact_cash = None
 
 
     def delete_first_contact(self):
@@ -23,6 +24,7 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to.alert.accept()
         self.return_to_homepage()
+        self.contact_cash = None
 
 
     def update_first_contact(self, contact):
@@ -32,6 +34,7 @@ class ContactHelper:
         # press to update button
         wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
         self.return_to_homepage()
+        self.contact_cash = None
 
 
     def select_first_contact(self):
@@ -137,14 +140,17 @@ class ContactHelper:
         if not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name("searchstring")) > 0):
             wd.find_element_by_link_text("home").click()
 
+    contact_cash = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        self.open_contact_page()
-        contacts = []
-        for element in wd.find_elements_by_name('entry'):
-            cells = element.find_elements_by_tag_name("td")
-            first_name = cells[2].text
-            last_name = cells[1].text
-            id = cells[0].find_element_by_tag_name("input").get_attribute("value")
-            contacts.append(Contact(_first_name=first_name, _last_name=last_name, _id=id))
-        return contacts
+        if self.contact_cash is None:
+            wd = self.app.wd
+            self.open_contact_page()
+            self.contact_cash = []
+            for element in wd.find_elements_by_name('entry'):
+                cells = element.find_elements_by_tag_name("td")
+                first_name = cells[2].text
+                last_name = cells[1].text
+                id = cells[0].find_element_by_tag_name("input").get_attribute("value")
+                self.contact_cash.append(Contact(_first_name=first_name, _last_name=last_name, _id=id))
+        return list(self.contact_cash)
