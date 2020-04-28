@@ -38,7 +38,9 @@ class Contact:
 
 
     def __repr__(self):
-        return "%s %s %s" % self.id, self.first_name, self.last_name
+        return "%s:%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s" % (self.id, self.first_name, self.middle_name, self.last_name, self.nickname,
+            self.company, self.address, self.telephone_home, self.telephone_mobile, self.telephone_work, self.fax, self.email, self.email2, self.email3,
+            self.homepage, self.bday, self.bmonth, self.byear, self.aday, self.amonth, self.ayear, self.secondary_address, self.secondary_home, self.secondary_notes)
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) and self.first_name == other.first_name and self.last_name == other.last_name
