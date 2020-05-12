@@ -28,12 +28,30 @@ class ContactHelper:
         self.return_to_homepage()
         self.contact_cash = None
 
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.select_contact_by_id(id)
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to.alert.accept()
+        self.return_to_homepage()
+        self.contact_cash = None
+
+
     def update_first_contact(self, contact):
         self.update_contact_by_index(0)
 
     def update_contact_by_index(self, index, contact):
         wd = self.app.wd
         self.select_contact_by_index(index)
+        self.fill_contact(contact)
+        # press to update button
+        wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
+        self.return_to_homepage()
+        self.contact_cash = None
+
+    def update_contact_by_id(self, id, contact):
+        wd = self.app.wd
+        self.select_contact_by_id(id)
         self.fill_contact(contact)
         # press to update button
         wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
@@ -51,6 +69,11 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
         self.click_edit_button(index)
+
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+        #self.click_edit_button(index)
 
     def open_contact_to_edit_by_index(self, index):
         wd = self.app.wd
@@ -207,3 +230,4 @@ class ContactHelper:
                                                  _all_email_addresses=all_email_addresses, _id=id,
                                                  _all_phones_from_homepage=all_phones))
         return list(self.contact_cash)
+
